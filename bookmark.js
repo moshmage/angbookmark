@@ -23,14 +23,15 @@ bookmarks.controller('bmControl',['$scope','$http', function($scope, $http) {
 		localStorage.bookmarks = angular.toJson($scope.links);
 	}
 	$scope.saveBookmarks = function() {
-		var dataToPost = {
-			'paste_data':localStorage.bookmarks,
-			'paste_lang':'text',
-			'api_submit':true,
-			'mode':'json',
-			'paste_expire':0
+		console.log("TODO: Reach gist and paste stuff.");
+	/*	var dataToPost = {
+			'api_paste_code':localStorage.bookmarks,
+			'api_paste_format':'text',
+			'api_paste_expire_date':0,
+			'api_paste_name':'THENAMEOFTHEPASTE',
+			'api_paste_private':1
 		};
-		$http.jsonp('http://paste.is/',dataToPost).success(function(data,status,headers,config) {
+		$http.post('http://pastebin.com/api/api_post.php',dataToPost).success(function(data,status,headers,config) {
 			console.log(data);
 			console.log(status);
 			console.log(headers);
@@ -40,5 +41,6 @@ bookmarks.controller('bmControl',['$scope','$http', function($scope, $http) {
 			console.log(data);
 			console.log(status);
 		});
+	*/
 	}
 }]);
