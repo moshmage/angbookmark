@@ -1,8 +1,12 @@
 var bookmarks = angular.module('bookmarks',[]),
-	uid = 0;
+	uid = 0,
+	stock_hack;
+function stock_search(data) { stock_hack = data; }
+
 
 bookmarks.controller('bmControl',['$scope','$http', function($scope, $http) {
 	$scope.bookmark = {};
+
 	if (localStorage.bookmarks) {
 		$scope.links = angular.fromJson(localStorage.bookmarks);
 	}
@@ -24,23 +28,23 @@ bookmarks.controller('bmControl',['$scope','$http', function($scope, $http) {
 	}
 	$scope.saveBookmarks = function() {
 		console.log("TODO: Reach gist and paste stuff.");
-	/*	var dataToPost = {
-			'api_paste_code':localStorage.bookmarks,
-			'api_paste_format':'text',
-			'api_paste_expire_date':0,
-			'api_paste_name':'THENAMEOFTHEPASTE',
-			'api_paste_private':1
+		var dataToPost = {
+			'code':localStorage.bookmarks,
+			'pname':'text',
+			'callback':'stock_search'
 		};
-		$http.post('http://pastebin.com/api/api_post.php',dataToPost).success(function(data,status,headers,config) {
-			console.log(data);
-			console.log(status);
-			console.log(headers);
-			console.log(config);
+		$http({
+			method: "JSONP",
+			params: dataToPost,
+			url:'http://pasterelay.loomhost.com/pasterelay.php',
+			isArray: true
+		}).success(function(data,status){
+			/* Angular Bug, function is never successfull. */
 		}).error(function(data,status){
-			console.log("ERROR GETTING THING:");
-			console.log(data);
-			console.log(status);
+			/* stock_hack === data retrieved */
+			// console.info(stock_hack);
+			localStorage.cloudBookmarks = stock_hack.backupLink;
+			console.log(stock_hack.backupLink);
 		});
-	*/
 	}
 }]);
