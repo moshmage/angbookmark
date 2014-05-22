@@ -47,4 +47,35 @@ bookmarks.controller('bmControl',['$scope','$http', function($scope, $http) {
 			console.log(stock_hack.backupLink);
 		});
 	}
+	$scope.loadBookmarks = function () {
+		if (localStorage.cloudBookmarks) {
+			var path = localStorage.cloudBookmarks.split("/").slice(-1)[0];
+			console.log(path);
+			var dataToPost = {
+				'retrieve': path,
+				'callback': 'stock_search'
+			};
+			$http({
+				method: "JSONP",
+				params: dataToPost,
+				url:'http://pasterelay.loomhost.com/pasterelay.php',
+				isArray: true
+			}).success(function(data,status){
+				/* Angular Bug, function is never successfull. */
+			}).error(function(data,status){
+				/* stock_hack === data retrieved */
+				console.info(angular.toJson(stock_hack));
+				 if (!stock_hack.error) {
+				 	localStorage.bookmarks = angular.toJson(stock_hack);
+				 	$scope.links = angular.fromJson(stock_hack);
+				 }
+				 else {
+
+				 }
+			});
+		}
+		else {
+
+		}
+	}
 }]);

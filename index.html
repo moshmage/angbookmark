@@ -39,13 +39,14 @@
 						</fieldset>
 						<button type="button" ng-click="saveLink()" class="button-xsmall pure-button pure-button-primary">New</button>
 						<button type="button" ng-click="saveBookmarks()" class="button-xsmall pure-button pure-button-primary">Save on Cloud</button>
+						<button type="button" ng-click="loadBookmarks()" class="button-xsmall pure-button pure-button-primary">Load from Cloud</button>
 					</form>
                 </section>
 
 				<div class="">
 					<table class="pure-table pure-table-horizontal" style="width:100%">
 						<thead class=""><tr><th></th><th></th></tr></thead>
-						<tr ng-repeat="link in links">
+						<tr ng-repeat="link in links track by $index">
 							<td><a href="{{ link.link }}">{{ link.link }}</td>
 							<td align="right"><button ng-click="delLink(link.id)" class="pure-button">del</button></td>
 						</tr>
