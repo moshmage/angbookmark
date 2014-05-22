@@ -1,5 +1,10 @@
 <?php
 	header("Content-type: application/json");  
+	/*
+		This file can be uploaded to wherever, It's beinguploaded here as a safe-keep if you want to have yoru own relayer.
+		This one is hosted at http://pasterelay.loomhost.com/pasterelay.php and uses my dev key - feel free to use it
+		 
+	*/
 	if (isset($_GET['code'])) {
 
 		$api_dev_key 			= 'lalalal post your dev key here'; // your api_developer_key
